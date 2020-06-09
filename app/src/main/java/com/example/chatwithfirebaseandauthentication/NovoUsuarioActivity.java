@@ -3,6 +3,7 @@ package com.example.chatwithfirebaseandauthentication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -20,8 +21,8 @@ public class NovoUsuarioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_novo_usuario);
         // Inicialização das variáveis
-        loginNovoUsuarioEditText = findViewById(R.id.loginEditText);
-        senhaNovoUsuarioEditText = findViewById(R.id.senhaEditText);
+        loginNovoUsuarioEditText = findViewById(R.id.loginNovoUsuarioEditText);
+        senhaNovoUsuarioEditText = findViewById(R.id.senhaNovoUsuarioEditText);
         mAuth = FirebaseAuth.getInstance();
     }
 
@@ -34,9 +35,17 @@ public class NovoUsuarioActivity extends AppCompatActivity {
         // Observação: lambda expression só é possível do Java 8 pra frente
         mAuth.createUserWithEmailAndPassword(login, senha)
                 .addOnSuccessListener((result) -> { // em caso de sucesso exibe um toast com o nome do usuário
-                    Toast.makeText(this, result.getUser().toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this,
+                            getString(R.string.cadastro_sucesso),
+                            Toast.LENGTH_SHORT).show();
                     finish();
-                })
-                .addOnFailureListener(error -> error.printStackTrace()); // Em caso de erro, printa o stack trace
+                }).addOnFailureListener((error) -> {
+            Toast.makeText(this,
+                    getString(R.string.cadastro_falha),
+                    Toast.LENGTH_SHORT).show();
+            Log.e("CADASTRO", error.getMessage(), error); // Em caso de erro, printa o stack trace
+            finish();
+        });
+
     }
 }

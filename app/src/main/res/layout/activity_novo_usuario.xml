@@ -8,6 +8,7 @@
     tools:context=".NovoUsuarioActivity"
     android:orientation="vertical">
     <EditText
+        android:id="@+id/loginNovoUsuarioEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="12dp"
@@ -16,6 +17,7 @@
         android:layout_marginStart="20dp"
         android:hint="@string/dica_login"/>
     <EditText
+        android:id="@+id/senhaNovoUsuarioEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="12dp"
