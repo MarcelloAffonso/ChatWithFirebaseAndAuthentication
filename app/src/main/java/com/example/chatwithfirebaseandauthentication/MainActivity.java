@@ -23,10 +23,6 @@ public class MainActivity extends AppCompatActivity {
         loginEditText = findViewById(R.id.loginEditText);
         senhaEditText = findViewById(R.id.senhaEditText);
 
-        // teste hard coded
-        //loginEditText.setText("teste@teste.com");
-        //senhaEditText.setText("123456");
-
         // Cria instância do serviço de autorização do Firebase
         mAuth = FirebaseAuth.getInstance();
     }
@@ -44,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         // Utiliza o serviço de autorização criado anteriormente para possibilitar o login
         mAuth.signInWithEmailAndPassword(login,
                 senha).addOnSuccessListener((result) -> {
-                    startActivity(new Intent(this,  ChatActivity.class)); // caso consiga fazer login redireciona para o chat
+                    startActivity(new Intent(this,  CategoriasActivity.class)); // caso consiga fazer login redireciona para o chat
         }).addOnFailureListener((exception) -> { // Coloca o listener para o caso de dar erro
             exception.printStackTrace();
             Toast.makeText(this, exception.getMessage(), Toast.LENGTH_SHORT).show();

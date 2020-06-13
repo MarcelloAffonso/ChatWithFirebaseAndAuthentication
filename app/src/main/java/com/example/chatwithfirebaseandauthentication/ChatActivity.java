@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,11 +52,13 @@ public class ChatActivity extends AppCompatActivity {
         linearLayoutManager.setReverseLayout(true);
         mensagensRecyclerView.setLayoutManager(linearLayoutManager);
         mensagemEditText = findViewById(R.id.mensagemEditText);
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+
         setupFirebase();
     }
 
@@ -65,9 +68,27 @@ public class ChatActivity extends AppCompatActivity {
         fireUser = FirebaseAuth.getInstance().getCurrentUser();
 
         // Pega as mensagens
-        mMsgsReference = FirebaseFirestore.getInstance().collection("mensagens");
+        mMsgsReference = FirebaseFirestore.getInstance().collection(getCategoria());
         getRemoteMsgs();
     }
+
+    private String getCategoria(){
+        // Instancia o intent
+        Intent intent = getIntent();
+
+        // Cria a variável com valor default 'cinema' por default
+        String categoria = "";
+
+        // Verifica se existe o extra data 'categoria'
+        if(intent.hasExtra("categoria"))
+        {
+            // caso exista captura o valor desse extra data
+            categoria = getIntent().getStringExtra("categoria");
+        }
+
+        return categoria;
+    }
+
 
     private void getRemoteMsgs() {
         mMsgsReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -87,7 +108,7 @@ public class ChatActivity extends AppCompatActivity {
     // Recupera a mensagem e o usuário que mandou a mensagem para gravar no firebase
     public void enviarMensagem(View view) {
         String mensagem = mensagemEditText.getText().toString();
-        Mensagem m = new Mensagem(fireUser.getEmail(), new Date(), mensagem);
+        Mensagem m = new Mensagem(fireUser.getEmail(), new Date(), mensagem, getCategoria());
         esconderTeclado(view);
         mMsgsReference.add(m);
     }

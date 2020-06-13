@@ -6,6 +6,7 @@ class Mensagem implements Comparable<Mensagem> {
     private String usuario;
     private Date data;
     private String texto;
+    private String categoria;
 
     public String getUsuario() {
         return usuario;
@@ -31,10 +32,19 @@ class Mensagem implements Comparable<Mensagem> {
         this.texto = texto;
     }
 
-    public Mensagem(String usuario, Date data, String texto) {
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public Mensagem(String usuario, Date data, String texto, String categoria) {
         this.usuario = usuario;
         this.data = data;
         this.texto = texto;
+        this.categoria = categoria;
     }
 
     public Mensagem() {
