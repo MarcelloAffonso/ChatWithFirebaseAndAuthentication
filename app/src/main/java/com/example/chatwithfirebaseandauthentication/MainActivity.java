@@ -41,9 +41,13 @@ public class MainActivity extends AppCompatActivity {
         mAuth.signInWithEmailAndPassword(login,
                 senha).addOnSuccessListener((result) -> {
                     startActivity(new Intent(this,  CategoriasActivity.class)); // caso consiga fazer login redireciona para o chat
-        }).addOnFailureListener((exception) -> { // Coloca o listener para o caso de dar erro
-            exception.printStackTrace();
-            Toast.makeText(this, exception.getMessage(), Toast.LENGTH_SHORT).show();
+        }).addOnFailureListener((error) -> {
+            Toast.makeText(
+                    this,
+                    getString(R.string.falha_login),
+                    Toast.LENGTH_LONG)
+                    .show();
+            error.printStackTrace();
         });
 
     }

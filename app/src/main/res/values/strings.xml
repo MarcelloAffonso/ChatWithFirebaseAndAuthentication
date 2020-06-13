@@ -16,4 +16,5 @@
     <string name="efetue_o_login_para_entrar_em_um_chat">Efetue o login para entrar em um chat!</string>
     <string name="insira_os_dados_para_cadastro">Insira os dados para cadastro</string>
     <string name="chat_da_categoria">Chat da categoria: </string>
+    <string name="falha_login">Login falhou</string>
 </resources>

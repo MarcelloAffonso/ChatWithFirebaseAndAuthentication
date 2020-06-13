@@ -110,6 +110,9 @@ public class ChatActivity extends AppCompatActivity {
         String mensagem = mensagemEditText.getText().toString();
         Mensagem m = new Mensagem(fireUser.getEmail(), new Date(), mensagem, getCategoria());
         esconderTeclado(view);
+        
+        // Limpeza do chat após enviar a mensagem
+        this.mensagemEditText.setText("");
         mMsgsReference.add(m);
     }
 
